@@ -1,0 +1,85 @@
+/* Styles spécifiques au composant projects */
+
+/* Style pour les cartes en forme de dossier */
+.folder-card {
+  position: relative;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+/* Créer la découpe en forme de dossier */
+.folder-tab {
+  position: absolute;
+  top: -10px;
+  left: 20%;
+  width: 60%;
+  height: 20px;
+  background-color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border: 1px solid #e5e7eb;
+  border-bottom: none;
+  z-index: 1;
+}
+
+/* Pour que le contenu apparaisse devant l'encoche */
+.card-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Style pour l'icône carrée orange */
+.bg-orange-500 {
+  background-color: #f97316;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Partie inférieure avec la date et le menu */
+.bg-gray-50 {
+  background-color: #f9fafb;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* Animation pour l'indicateur de progression circulaire */
+svg circle:nth-child(2) {
+    transition: stroke-dasharray 1s ease;
+  }
+  
+  /* Ajustez le design de l'indicateur de progression circulaire */
+  svg text {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+  }
+  
+  /* Styles pour les cartes de projet */
+  .card-container {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+
+  }
+  
+  .card-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Ajustements pour l'affichage sur mobile */
+  @media (max-width: 640px) {
+    .project-details {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    /* Réduire la taille de l'indicateur de progression sur mobile */
+    .progress-circle {
+      width: 60px;
+      height: 60px;
+    }
+  }

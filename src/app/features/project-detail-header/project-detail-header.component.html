@@ -1,0 +1,139 @@
+<div class="container mx-auto px-4 py-6 ">
+
+    <!-- Navigation Tabs -->
+    <nav class="flex border-b">
+      <ul class="flex space-x-10 text-lg">
+        <li [class.border-b-2]="activeTab === 'presentation'" 
+            [class.border-black]="activeTab === 'presentation'" 
+            class="pb-2">
+          <a (click)="setActiveTab('presentation')" class="font-medium cursor-pointer">Présentation du projet</a>
+        </li>
+        <li [class.border-b-2]="activeTab === 'tasks'" 
+            [class.border-orange-500]="activeTab === 'tasks'"
+            [class.text-orange-500]="activeTab === 'tasks'"
+            class="pb-2">
+          <a (click)="setActiveTab('tasks')" class="font-medium cursor-pointer">Tâches</a>
+        </li>
+        <li [class.border-b-2]="activeTab === 'team'" 
+            [class.border-orange-500]="activeTab === 'team'"
+            [class.text-orange-500]="activeTab === 'team'"
+            class="pb-2">
+          <a (click)="setActiveTab('team')" class="font-medium cursor-pointer">Équipe</a>
+        </li>
+        <li [class.border-b-2]="activeTab === 'lots'" 
+            [class.border-orange-500]="activeTab === 'lots'"
+            [class.text-orange-500]="activeTab === 'lots'"
+            class="pb-2">
+          <a (click)="setActiveTab('lots')" class="font-medium cursor-pointer">Lots et sous-traitants</a>
+        </li>
+        <li [class.border-b-2]="activeTab === 'documents'" 
+            [class.border-orange-500]="activeTab === 'documents'"
+            [class.text-orange-500]="activeTab === 'documents'"
+            class="pb-2">
+          <a (click)="setActiveTab('documents')" class="font-medium cursor-pointer">Documents</a>
+        </li>
+        <li [class.border-b-2]="activeTab === 'budget'" 
+            [class.border-orange-500]="activeTab === 'budget'"
+            [class.text-orange-500]="activeTab === 'budget'"
+            class="pb-2">
+          <a (click)="setActiveTab('budget')" class="font-medium cursor-pointer">Budget</a>
+        </li>
+        <li [class.border-b-2]="activeTab === 'stock'" 
+            [class.border-orange-500]="activeTab === 'stock'"
+            [class.text-orange-500]="activeTab === 'stock'"
+            class="pb-2">
+          <a (click)="setActiveTab('stock')" class="font-medium cursor-pointer">Stock</a>
+        </li>
+      </ul>
+    </nav>
+  
+    <!-- Project Card -->
+    <div class="mt-10 bg-[#E6E7EC] border rounded-lg p-6 shadow-sm">
+      <h1 class="text-2xl font-bold mb-6">
+        Projet : <span class="font-normal">Construction d'un immeuble résidentiel de 10 Étages</span>
+      </h1>
+  
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
+        <!-- Status Card -->
+        <div class="border rounded-lg p-4 flex items-center bg-white">
+          <div class="w-1 h-12 bg-orange-300 rounded-full mr-4"></div>
+          <div class="flex-1">
+            <div class="text-gray-600 mb-1">Status</div>
+            <div class="flex items-center">
+              <span class="bg-yellow-300 text-black px-3 py-1 rounded-full font-medium mr-2">En progression</span>
+              <span class="text-lg font-medium">42,31%</span>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Tasks Card -->
+        <div class="border rounded-lg p-4 flex items-center bg-white">
+          <div class="w-1 h-12 bg-orange-300 rounded-full mr-4"></div>
+          <div class="flex-1">
+            <div class="text-gray-600 mb-1">Totale des tâches</div>
+            <div class="flex items-center">
+              <span class="text-lg font-medium">33</span>
+              <span class="text-gray-500 mx-1">/</span>
+              <span class="text-lg font-medium">78</span>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Due Date Card -->
+        <div class="border rounded-lg p-4 flex items-center bg-white">
+          <div class="w-1 h-12 bg-orange-300 rounded-full mr-4"></div>
+          <div class="flex-1">
+            <div class="text-gray-600 mb-1">Date d'échéance</div>
+            <div class="flex items-center">
+              <span class="text-lg font-medium">28 mars 2025</span>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Budget Card -->
+        <div class="border rounded-lg p-4 flex items-center bg-white">
+          <div class="w-1 h-12 bg-orange-300 rounded-full mr-4"></div>
+          <div class="flex-1">
+            <div class="text-gray-600 mb-1">Budget utilisé</div>
+            <div class="flex items-center">
+              <span class="text-lg font-medium">Fcfa 700.000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content based on active tab -->
+  @switch (activeTab) {
+    @case ('tasks') {
+      <app-task-board></app-task-board>
+    }
+    @case ('team') {
+      <app-team-list></app-team-list>
+    }
+    @case ('documents') {
+      <app-documents></app-documents>
+    }
+    @case ('lots') {
+      <!-- <app-lots></app-lots> -->
+      <div>Contenu pour lots et sous-traitants</div>
+    }
+    @case ('budget') {
+      <!-- <app-budget></app-budget> -->
+      <div>Contenu pour budget</div>
+    }
+    @case ('stock') {
+      <!-- <app-stock></app-stock> -->
+      <div>Contenu pour stock</div>
+    }
+    @case ('presentation') {
+      <!-- <app-presentation></app-presentation> -->
+      <div>Présentation du projet</div>
+    }
+    @default {
+      <div>Sélectionnez un onglet</div>
+    }
+  }
+  

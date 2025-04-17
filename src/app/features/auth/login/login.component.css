@@ -1,0 +1,22 @@
+/* .bg-custom {
+    background-color: red;
+  } */
+   .container{
+    background-color: blue;
+   }
+   .text-right
+   {
+    background: red;
+   }
+.texte-bottom{
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 1.6;
+    letter-spacing: 0%;
+    text-align: center;
+    color: red;
+    
+
+  }
+

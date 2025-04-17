@@ -1,0 +1,41 @@
+<!-- dossiers.component.html -->
+<div class="p-6">
+  <div class="flex items-center mb-8">
+    <div class="bg-white border border-gray-300 p-2 rounded">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+      </svg>
+    </div>
+    <h1 class="text-2xl font-bold ml-2">Dossiers</h1>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div *ngFor="let dossier of dossiers" class="relative h-full">
+      <div class="border border-gray-200 rounded-lg overflow-hidden h-full flex flex-col">
+        <div class="bg-white h-8 border-b border-gray-200 relative flex-shrink-0">
+          <!-- Folder tab shape -->
+          <div class="absolute top-0 h-8 w-32 bg-white border-r border-gray-200 rounded-tr-lg"></div>
+        </div>
+        <div class="p-6 bg-white flex-grow flex flex-col">
+          <div class="flex items-center mb-4">
+            <div class="bg-orange-500 rounded p-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+            </div>
+            <h2 class="ml-2 text-lg font-medium">{{ dossier.title }}</h2>
+          </div>
+          
+          <div class="flex justify-between items-center mt-auto">
+            <div class="text-sm text-gray-500">{{ dossier.date | date:'dd MMMM yyyy' }}</div>
+            <button class="text-gray-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

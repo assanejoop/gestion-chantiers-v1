@@ -1,0 +1,209 @@
+<div class="flex min-h-screen bg-white ">
+    <!-- Partie gauche - Image -->
+    <div class="w-1/2 hidden md:block">
+      <img src="assets/images/loginimg.png" alt="Outils de construction" class="object-cover w-[678] h-[910] mx-auto py-4" />
+    </div>
+    
+    <!-- Partie droite - Formulaire -->
+    <div class="w-full md:w-1/2 flex flex-col justify-center px-8 py-12">
+      <div class="max-w-lg mx-auto w-full">
+        <!-- En-tête -->
+        <div class="mx-auto mb-8">
+          <h1 class="text-4xl font-bold text-gray-800 mb-2 w-[631px] h-[50px]" >Bienvenue sur innovchantiers inc.</h1>
+          <p class="text-lg text-gray-600">Simplifiez vos chantiers, boostez votre efficacité !</p>
+        </div>
+        
+        <!-- Onglets de navigation -->
+        <div class="flex mb-8">
+          <button 
+            class="flex-1 py-2 px-4 text-center rounded-l-lg bg-orange-500 text-white font-medium  w-[175px]
+            h-[35px]"
+            [class.bg-orange-500]="activeTab === 'connexion'"
+            [class.text-white]="activeTab === 'connexion'"
+            [class.bg-gray-100]="activeTab !== 'connexion'"
+            [class.text-gray-600]="activeTab !== 'connexion'"
+            (click)="setActiveTab('connexion')">
+            Connexion
+          </button>
+          <button 
+            class="flex-1 py-2 px-4 text-center rounded-r-lg bg-gray-100 text-gray-600 font-medium  w-[175px]
+            h-[35px]"
+            [class.bg-orange-500]="activeTab === 'inscription'"
+            [class.text-white]="activeTab === 'inscription'"
+            [class.bg-gray-100]="activeTab !== 'inscription'"
+            [class.text-gray-600]="activeTab !== 'inscription'"
+            (click)="setActiveTab('inscription')">
+            Inscription
+          </button>
+        </div>
+        
+        <!-- Formulaire de connexion -->
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="activeTab === 'connexion'">
+          <!-- Champ Email -->
+          <div class="mb-4">
+            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              formControlName="email"
+              placeholder="Entrez votre email" 
+              class="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 border border-[#465FF1] opacity-40"
+            />
+          </div>
+          
+          <!-- Champ Mot de passe -->
+          <div class="mb-2">
+            <label for="password" class="block text-gray-700 font-medium mb-2  ">Mot de passe</label>
+            <div class="relative">
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                id="password" 
+                formControlName="password"
+                placeholder="Entrez votre mot de passe" 
+                class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 border-[#465FF1] opacity-40" 
+              />
+              <button 
+                type="button"
+                (click)="togglePasswordVisibility()"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5 text-gray-500">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5 text-gray-500">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Lien Mot de passe oublié -->
+          <div class="text-right mb-6">
+            <a href="#" class="text-sm text-gray-600 hover:text-orange-500 underline italic">Mot de passe oublié ?</a>
+          </div>
+          
+          <!-- Bouton de connexion -->
+          <button 
+            type="submit" 
+            class="w-full bg-orange-500 text-white py-3 rounded-lg font-medium hover:bg-orange-600 transition-colors">
+            Se connecter
+          </button>
+          
+          <!-- Séparateur OU -->
+          <div class="flex items-center my-6">
+            <div class="flex-grow border-t border-gray-300"></div>
+            <span class="px-4 text-gray-500 text-sm">ou</span>
+            <div class="flex-grow border-t border-gray-300"></div>
+          </div>
+          
+          <!-- Boutons de connexion sociale -->
+          <div class="flex space-x-4">
+            <button type="button" class="flex-1 border  py-3 rounded-[8px] flex justify-center items-center hover:bg-gray-50 border-[#465FF1]  w-[112px] h-[48px] p-10">
+  
+              <img src="assets/images/google.png" alt="Google" class="h-5 w-5" />
+            </button>
+            <button type="button" class="flex-1 border  py-3 rounded-[8px] flex justify-center items-center hover:bg-gray-50 border-[#465FF1]  w-[112px] h-[48px] p-10">
+              <img src="assets/images/apple.png" alt="Apple" class="h-5 w-5" />
+            </button>
+          </div>
+        </form>
+        
+        <!-- Formulaire d'inscription (à implémenter si nécessaire) -->
+        <!-- <div *ngIf="activeTab === 'inscription'" class="text-center py-12">
+          <p class="text-gray-600">Formulaire d'inscription à implémenter</p>
+          
+      
+          
+        </div> -->
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="activeTab === 'inscription'">
+          <!-- Champ Email -->
+          <div class="mb-4">
+            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              formControlName="email"
+              placeholder="Entrez votre email" 
+              class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 border-[#465FF1] opacity-40"
+            />
+          </div>
+          
+          <!-- Champ Mot de passe -->
+          <div class="mb-2">
+            <label for="password" class="block text-gray-700 font-medium mb-2">Mot de passe</label>
+            <div class="relative">
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                id="password" 
+                formControlName="password"
+                placeholder="Entrez votre mot de passe" 
+                class="w-full px-4 py-3 border border-[#465FF1] opacity-40 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+              <button 
+                type="button"
+                (click)="togglePasswordVisibility()"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5 text-gray-500">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5 text-gray-500">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Lien Mot de passe oublié -->
+          <div class="text-right mb-6">
+            <!-- <a href="#" class="text-sm text-gray-600 hover:text-orange-500 underline">Mot de passe oublié ?</a> -->
+          </div>
+          
+          <!-- Bouton de connexion -->
+          <button   (click)="navigateToRegister() "
+            type="button" 
+            class="w-full bg-orange-500 text-white py-3 rounded-lg font-medium hover:bg-orange-600 transition-colors mt-10" >
+            S' inscrire 
+          </button>
+          
+          <!-- Séparateur OU -->
+          <div class="flex items-center my-6">
+            <div class="flex-grow border-t "></div>
+            <span class="px-4 text-gray-500 text-sm">ou</span>
+            <div class="flex-grow border-t border-gray-300"></div>
+          </div>
+          
+          <!-- Boutons de connexion sociale -->
+          <div class="flex space-x-4">
+            <button type="button" class="flex-1 border py-3 rounded-lg flex justify-center items-center hover:bg-gray-50  border-[#465FF1] ">
+              <img src="assets/images/google.png" alt="Google" class="h-5 w-5" />
+            </button>
+            <button type="button" class="flex-1 border  border-[#465FF1] py-3 rounded-lg flex justify-center items-center hover:bg-gray-50">
+              <img src="assets/images/apple.png" alt="Apple" class="h-5 w-5" />
+            </button>
+            
+          </div>
+         <div class="mt-10 text-center text-xs  font-normal leading-relaxed font-inter"> 
+          <span class="   mx-auto ">
+            En m'inscrivant pour créer un compte, j'accepte  
+          </span>
+          <span>  les Conditions  <br>d'utilisation et la Politique de confidentialité de l'entreprise.</span>
+        </div>
+        </form>
+        
+   
+        <!-- Logo en bas de page -->
+        <div class="mt-12 text-right">
+          <div class="flex justify-end items-center">
+           
+            <img src="assets/images/logo.svg" alt="Logo Innovchantiers" class="mr-2 mt-20  w-[254px] h-[29px] " />
+            <!-- <span class="text-lg font-medium text-gray-800">Innovchantiers inc.</span> -->
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  

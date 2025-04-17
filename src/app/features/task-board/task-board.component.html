@@ -1,0 +1,565 @@
+<div class="flex justify-between items-center mb-6">
+  <h2 class="text-2xl font-bold text-gray-800">Organisation des tâches</h2>
+  <button class="flex items-center px-5 py-2 bg-white border border-gray-300 rounded-full shadow-sm hover:bg-gray-50">
+    <span class="mr-2 text-xl">+</span>
+    <span>Ajouter une  tâche</span>
+  </button>
+</div>
+<div class="container mx-auto p-4">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <!-- Colonne À faire -->
+      <div class="bg-gray-50 rounded-lg shadow p-2">
+        <div class="flex justify-between items-center mb-2">
+          <div class="flex items-center">
+            <div class="w-5 h-5 rounded-full border border-gray-300 mr-2"></div>
+            <h2 class="font-medium">À faire</h2>
+            <span class="ml-1 text-gray-600">4</span>
+          </div>
+          <div class="flex">
+            <button class="p-1 text-gray-500 hover:bg-gray-100 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+            </button>
+            <button class="p-1 text-gray-500 hover:bg-gray-100 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+  
+        <!-- Tâche 1 -->
+        <div class="bg-white rounded-lg shadow-sm mb-4 overflow-hidden">
+          <div class="p-3">
+            <div class="flex mb-1">
+              <div class="flex -space-x-2">
+                <img src="assets/images/av1.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av2.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av3.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av4.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+              </div>
+              <!-- <span class="text-xs text-gray-500 ml-1 rounded-full bg-gray-100" >+4</span> -->
+            </div>
+            <h3 class="font-medium text-sm">Commander les matériaux principaux</h3>
+            <p class="text-xs text-gray-500 mt-1">Cette étape consiste à préparer l'approvisionnement...</p>
+            
+            <div class="mt-2">
+              <span class="inline-block bg-blue-50 text-blue-500 text-xs px-2 py-1 rounded">Approvisionnement</span>
+            </div>
+          </div>
+          <div class="border-t px-3 py-2 flex justify-between items-center bg-gray-50">
+            <div class="flex items-center text-gray-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+              <span class="text-sm">4</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+              <span class="text-sm">5</span>
+            </div>
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="text-xs text-gray-500">Lun, 24 mars</span>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Tâche 2 -->
+        <div class="bg-white rounded-lg shadow-sm mb-4 overflow-hidden">
+          <div class="p-3">
+            <div class="flex mb-1">
+              <div class="flex -space-x-2">
+                <img src="assets/images/av1.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av2.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av3.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av4.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+              </div>
+              <!-- <span class="text-xs text-gray-500 ml-1">+4</span> -->
+            </div>
+            <h3 class="font-medium text-sm">Planifier l'installation du chantier et des...</h3>
+            <p class="text-xs text-gray-500 mt-1">Mettre en place un plan d'installation détaillé...</p>
+            
+            <div class="mt-2">
+              <span class="inline-block bg-yellow-50 text-yellow-500 text-xs px-2 py-1 rounded">Planification</span>
+            </div>
+          </div>
+          <div class="border-t px-3 py-2 flex justify-between items-center bg-gray-50">
+            <div class="flex items-center text-gray-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+              <span class="text-sm">4</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+              <span class="text-sm">5</span>
+            </div>
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="text-xs text-gray-500">Demain</span>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Tâche 3 -->
+        <div class="bg-white rounded-lg shadow-sm mb-4 overflow-hidden">
+          <div class="p-3">
+            <div class="flex mb-1">
+              <div class="flex -space-x-2">
+                <img src="assets/images/av1.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av2.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av3.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av4.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+              </div>
+              <!-- <span class="text-xs text-gray-500 ml-1">+4</span> -->
+            </div>
+            <h3 class="font-medium text-sm">Préparation du site, vérification des éq...</h3>
+            <p class="text-xs text-gray-500 mt-1">Mettre en place un plan d'installation détaillé...</p>
+            
+            <div class="mt-2">
+              <span class="inline-block bg-red-50 text-red-500 text-xs px-2 py-1 rounded">Mise en place</span>
+            </div>
+          </div>
+          <div class="border-t px-3 py-2 flex justify-between items-center bg-gray-50">
+            <div class="flex items-center text-gray-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+              <span class="text-sm">4</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+              <span class="text-sm">5</span>
+            </div>
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="text-xs text-gray-500">Lun, 24 mars</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+  
+      <!-- Colonne En construction -->
+      <div class="bg-gray-50 rounded-lg shadow p-2">
+        <div class="flex justify-between items-center mb-2">
+          <div class="flex items-center">
+            <div class="w-5 h-5 rounded-full border border-yellow-400 bg-yellow-400 mr-2"></div>
+            <h2 class="font-medium">En construction</h2>
+            <span class="ml-1 text-gray-600">2</span>
+          </div>
+          <div class="flex">
+            <button class="p-1 text-gray-500 hover:bg-gray-100 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+            </button>
+            <button class="p-1 text-gray-500 hover:bg-gray-100 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+  
+        <!-- Tâche 1 avec image -->
+        <div class="bg-white rounded-lg shadow-sm mb-4 overflow-hidden">
+          <img src="/assets/images/imgdetail1.png" alt="Fondations" class="w-full h-40 object-cover">
+          <div class="p-3">
+            <div class="flex mb-1">
+              <div class="flex -space-x-2">
+                <img src="assets/images/av1.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av2.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av3.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av4.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+              </div>
+              <!-- <span class="text-xs text-gray-500 ml-1">+4</span> -->
+            </div>
+            <h3 class="font-medium text-sm">Coulage des fondations et installation...</h3>
+            <p class="text-xs text-gray-500 mt-1">L'une des premières étapes physiques de la...</p>
+            
+            <div class="mt-2">
+              <span class="inline-block bg-blue-50 text-blue-500 text-xs px-2 py-1 rounded">Gros Oeuvre</span>
+            </div>
+          </div>
+          <div class="border-t px-3 py-2 flex justify-between items-center bg-gray-50">
+            <div class="flex items-center text-gray-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+              <span class="text-sm">4</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+              <span class="text-sm">5</span>
+            </div>
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="text-xs text-gray-500">Demain</span>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Tâche 2 avec image -->
+        <div class="bg-white rounded-lg shadow-sm mb-4 overflow-hidden">
+          <img src="/assets/images/imgdetail2.png" alt="Fondations" class="w-full h-40 object-cover">
+          <div class="p-3">
+            <div class="flex mb-1">
+              <div class="flex -space-x-2">
+                <img src="assets/images/av1.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av2.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av3.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av4.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+              </div>
+              <!-- <span class="text-xs text-gray-500 ml-1">+4</span> -->
+            </div>
+            <h3 class="font-medium text-sm">Montage de la structure en béton arm...</h3>
+            <p class="text-xs text-gray-500 mt-1">Cette étape implique la construction de la st...</p>
+            
+            <div class="mt-2">
+              <span class="inline-block bg-orange-50 text-orange-500 text-xs px-2 py-1 rounded">Réseaux techniques</span>
+            </div>
+          </div>
+          <div class="border-t px-3 py-2 flex justify-between items-center bg-gray-50">
+            <div class="flex items-center text-gray-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+              <span class="text-sm">4</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+              <span class="text-sm">5</span>
+            </div>
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="text-xs text-gray-500">Demain</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Colonne Travaux de réfection -->
+      <div class="bg-gray-50 rounded-lg shadow p-2">
+        <div class="flex justify-between items-center mb-2">
+          <div class="flex items-center">
+            <div class="w-5 h-5 rounded-full border border-orange-400 bg-orange-400 mr-2"></div>
+            <h2 class="font-medium">Travaux de réfection</h2>
+            <span class="ml-1 text-gray-600">3</span>
+          </div>
+          <div class="flex">
+            <button class="p-1 text-gray-500 hover:bg-gray-100 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+            </button>
+            <button class="p-1 text-gray-500 hover:bg-gray-100 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+  
+        <!-- Tâche 1 avec image -->
+        <div class="bg-white rounded-lg shadow-sm mb-4 overflow-hidden">
+          <img src="/assets/images/imgdetail3..png" alt="Fondations" class="w-full h-40 object-cover">
+          <div class="p-3">
+            <div class="flex mb-1">
+              <div class="flex -space-x-2">
+                <img src="assets/images/av1.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av2.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av3.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av4.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+              </div>
+              <!-- <span class="text-xs text-gray-500 ml-1">+4</span> -->
+            </div>
+            <h3 class="font-medium text-sm">Vérification et ajustement des installation...</h3>
+            <p class="text-xs text-gray-500 mt-1">Ce travail consiste à tester les installations...</p>
+            
+            <div class="mt-2">
+              <span class="inline-block bg-green-50 text-green-500 text-xs px-2 py-1 rounded">Inspection</span>
+            </div>
+          </div>
+          <div class="border-t px-3 py-2 flex justify-between items-center bg-gray-50">
+            <div class="flex items-center text-gray-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+              <span class="text-sm">4</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+              <span class="text-sm">5</span>
+            </div>
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="text-xs text-gray-500">Demain</span>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Tâche 2 terminée -->
+        <div class="bg-white rounded-lg shadow-sm mb-4 overflow-hidden">
+          <div class="p-3">
+            <div class="flex mb-1">
+              <div class="flex -space-x-2">
+                <img src="assets/images/av1.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av2.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av3.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av4.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+              </div>
+              <!-- <span class="text-xs text-gray-500 ml-1">+4</span> -->
+            </div>
+            <h3 class="font-medium text-sm">Réparation des malfaçons détectées l...</h3>
+            <p class="text-xs text-gray-500 mt-1">Tout au long du processus, des inspections...</p>
+          
+          <div class="mt-2">
+            <span class="inline-block bg-purple-50 text-purple-500 text-xs px-2 py-1 rounded">Validation</span>
+          </div>
+        </div>
+        <div class="border-t px-3 py-2 flex justify-between items-center bg-gray-50">
+          <div class="flex items-center text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+            <span class="text-sm">4</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+            </svg>
+            <span class="text-sm">5</span>
+          </div>
+          <div class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-xs text-green-500">Done</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tâche 3 avec image -->
+      <div class="bg-white rounded-lg shadow-sm mb-4 overflow-hidden">
+        <img src="/assets/images/imgdetail4..png" alt="Fondations" class="w-full h-40 object-cover">
+        <div class="p-3">
+          <div class="flex mb-1">
+            <div class="flex -space-x-2">
+               <img src="assets/images/av1.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av2.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av3.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av4.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+            </div>
+            <!-- <span class="text-xs text-gray-500 ml-1">+4</span> -->
+          </div>
+          <h3 class="font-medium text-sm">Correction des défauts dans la maçon...</h3>
+          <p class="text-xs text-gray-500 mt-1">Une fois la structure de base en place, on vé...</p>
+          
+          <div class="mt-2">
+            <span class="inline-block bg-pink-50 text-pink-500 text-xs px-2 py-1 rounded">Correction</span>
+          </div>
+        </div>
+        <div class="border-t px-3 py-2 flex justify-between items-center bg-gray-50">
+          <div class="flex items-center text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+            <span class="text-sm">4</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+            </svg>
+            <span class="text-sm">5</span>
+          </div>
+          <div class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-xs text-green-500">Done</span>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+  <!-- Colonne Terminer-->
+    <div class="bg-gray-50 rounded-lg shadow p-2">
+      <div class="flex justify-between items-center mb-2">
+        <div class="flex items-center">
+          <div class="w-5 h-5 rounded-full border  border-green-400 bg-green-400   mr-2"></div>
+          <h2 class="font-medium">Terminé</h2>
+          <span class="ml-1 text-gray-600">4</span>
+        </div>
+        <div class="flex">
+          <button class="p-1 text-gray-500 hover:bg-gray-100 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+          </button>
+          <button class="p-1 text-gray-500 hover:bg-gray-100 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tâche 1 avec image -->
+      <div class="bg-white rounded-lg shadow-sm mb-4 overflow-hidden">
+        <img src="/assets/images/imgdetail5..png" alt="Fondations" class="w-full h-40 object-cover">
+        <div class="p-3">
+          <div class="flex mb-1">
+            <div class="flex -space-x-2">
+               <img src="assets/images/av1.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av2.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av3.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+                <img src="assets/images/av4.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+            </div>
+            <!-- <span class="text-xs text-gray-500 ml-1">+4</span> -->
+          </div>
+          <h3 class="font-medium text-sm">Vérification et ajustement des installation...</h3>
+          <p class="text-xs text-gray-500 mt-1">Ce travail consiste à tester les installations...</p>
+          
+          <div class="mt-2">
+            <span class="inline-block bg-green-50 text-green-500 text-xs px-2 py-1 rounded">Inspection</span>
+          </div>
+        </div>
+        <div class="border-t px-3 py-2 flex justify-between items-center bg-gray-50">
+          <div class="flex items-center text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+            <span class="text-sm">4</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+            </svg>
+            <span class="text-sm">5</span>
+          </div>
+          <div class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span class="text-xs text-gray-500">Demain</span>
+          </div>
+        </div>
+      </div>   
+  </div>
+  <!-- Colonne travaux de  finition  -->
+
+  <div class="bg-gray-50 rounded-lg shadow p-2">
+    <div class="flex justify-between items-center mb-2">
+      <div class="flex items-center">
+        <div class="w-5 h-5 rounded-full border border-orange-400 bg-orange-400 mr-2"></div>
+        <h2 class="font-medium">Travaux de finition</h2>
+        <span class="ml-1 text-gray-600">3</span>
+      </div>
+      <div class="flex">
+        <button class="p-1 text-gray-500 hover:bg-gray-100 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+        </button>
+        <button class="p-1 text-gray-500 hover:bg-gray-100 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  <!-- Tâche 1avec image -->
+  <div class="bg-white rounded-lg shadow-sm mb-4 overflow-hidden">
+    <img src="/assets/images/imgfinition.png" alt="Sol carrelé" class="w-full h-40 object-cover">
+    <div class="p-3">
+      <div class="flex mb-1">
+        <div class="flex -space-x-2">
+          <img src="assets/images/av1.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+          <img src="assets/images/av2.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+          <img src="assets/images/av3.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+          <img src="assets/images/av4.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+        </div>
+        <span class="text-xs text-gray-500 ml-1">+4</span>
+      </div>
+      <h3 class="font-medium text-sm">Correction des défauts dans la maçon...</h3>
+      <p class="text-xs text-gray-500 mt-1">Une fois la structure de base en place, on vé...</p>
+      
+      <div class="mt-2">
+        <span class="inline-block bg-pink-50 text-pink-500 text-xs px-2 py-1 rounded">Correction</span>
+      </div>
+    </div>
+    <div class="border-t px-3 py-2 flex justify-between items-center bg-gray-50">
+      <div class="flex items-center text-gray-500">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+        <span class="text-sm">4</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+        </svg>
+        <span class="text-sm">5</span>
+      </div>
+      <div class="flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="text-xs text-green-500">Done</span>
+      </div>
+    </div>
+  </div>
+
+    <!-- Tâche 2 terminée -->
+    <div class="bg-white rounded-lg shadow-sm mb-4 overflow-hidden">
+      <div class="p-3">
+        <div class="flex mb-1">
+          <div class="flex -space-x-2">
+            <img src="assets/images/av1.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+            <img src="assets/images/av2.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+            <img src="assets/images/av3.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+            <img src="assets/images/av4.png" class="w-6 h-6 rounded-full border-2 border-white" alt="User avatar">
+          </div>
+          <span class="text-xs text-gray-500 ml-1">+4</span>
+        </div>
+        <h3 class="font-medium text-sm">Réparation des malfaçons détectées l...</h3>
+        <p class="text-xs text-gray-500 mt-1">Tout au long du processus, des inspections...</p>
+      
+      <div class="mt-2">
+        <span class="inline-block bg-purple-50 text-purple-500 text-xs px-2 py-1 rounded">Validation</span>
+      </div>
+    </div>
+    <div class="border-t px-3 py-2 flex justify-between items-center bg-gray-50">
+      <div class="flex items-center text-gray-500">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+        <span class="text-sm">4</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+        </svg>
+        <span class="text-sm">5</span>
+      </div>
+      <div class="flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        <span class="text-xs text-gray-500">Demain</span>
+      </div>
+    </div>
+  </div>
+
+ 
+  
+</div>
+  </div>
+</div>
