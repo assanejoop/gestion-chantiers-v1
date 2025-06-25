@@ -1,0 +1,50 @@
+// interfaces/project.interface.ts
+export interface Project {
+  id: number;
+  name: string;
+  area: number;
+  price: string;
+  startDate: string;
+  endDate: string;
+  address: string;
+  numberOfLots: number;
+  description?: string;
+  propertyTypeId: number;
+  promoterId: number;
+  latitude: string;
+  longitude: string;
+  available: boolean;
+  
+  // Équipements
+  hasHall: boolean;
+  hasParking: boolean;
+  hasElevator: boolean;
+  hasSwimmingPool: boolean;
+  hasGym: boolean;
+  hasPlayground: boolean;
+  hasSecurityService: boolean;
+  hasGarden: boolean;
+  
+  
+  // Dates système
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface ProjectsResponse {
+  data: Project[];
+  current_page: number;
+  last_page: number;
+  per_page: number;
+  total: number;
+  from?: number;
+  to?: number;
+}
+
+export interface ProjectFilter {
+  search?: string;
+  propertyType?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  available?: boolean;
+}

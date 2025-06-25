@@ -13,7 +13,7 @@ export const FEATURES_ROUTES: Routes = [
   },
   { 
     path: 'financial', 
-    loadComponent: () => import('./financial/financial.component').then(m => m.FinancialComponent) 
+    loadComponent: () => import('./sub-contractor/financial.component').then(m => m.FinancialComponent) 
   },
   { 
     path: 'communication', 

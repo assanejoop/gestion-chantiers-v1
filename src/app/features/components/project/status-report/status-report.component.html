@@ -1,0 +1,116 @@
+<div class="bg-white min-h-screen p-6">
+  <!-- Navigation principale -->
+  <div class="bg-white rounded-lg shadow-sm mb-6">
+  
+
+    <!-- Sous-navigation entre Albums, Graphique, Tableau -->
+    <div class="flex bg-[#F5F7FA] px-6 p-[8px] rounded[8px]">
+      <button 
+        (click)="setActiveTab('albums')"
+        [ngClass]="activeTab === 'albums' ? 'text-orange-500 border-b-2 border-orange-500 bg-white font-medium' : 'text-gray-600 hover:text-gray-800'"
+        class="py-4 px-4 w-2/6 rounded-[4px]">
+        Vue Albums
+      </button>
+      <button 
+        (click)="setActiveTab('graphique')"
+        [ngClass]="activeTab === 'graphique' ? 'text-orange-500 border-b-2 border-orange-500 bg-white font-medium' : 'text-gray-600 hover:text-gray-800'"
+        class="py-4 px-4 w-2/6 rounded-[4px]">
+        Vue Graphique
+      </button>
+      <button 
+        (click)="setActiveTab('tableau')"
+        [ngClass]="activeTab === 'tableau' ? 'text-orange-500 border-b-2 border-orange-500 bg-white font-medium' : 'text-gray-600 hover:text-gray-800'"
+        class="py-4 px-4 w-2/6 rounded-[4px]">
+        Tableau indicateurs
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenu Vue Albums -->
+  
+   
+   
+   
+    <div class="p-4">
+      <div   *ngIf="activeTab === 'albums'"class= "grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Carte Album normale -->
+        <div class="rounded-xl overflow-hidden shadow bg-white">
+          <img src="assets/images/maison.jpg" alt="Album" class="w-full h-48 object-cover" />
+          <div class="p-4">
+            <h3 class="text-lg font-semibold mb-2">Phase 1</h3>
+            <div class="flex items-center text-gray-500 text-sm space-x-4">
+              <div class="flex items-center gap-1">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>23/10/2024</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <i class="fa-solid fa-image"></i>
+                <span>03 photos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Carte Album sombre avec actions -->
+        <div class="relative rounded-xl overflow-hidden shadow bg-black">
+          <img src="assets/images/interieur.jpg" alt="Album" class="w-full h-48 object-cover opacity-40" />
+          <div class="absolute inset-0 flex items-center justify-center gap-4 text-white text-xl">
+            <button class="hover:scale-110 transition" title="Voir"><i class="fa-solid fa-eye"></i></button>
+            <button class="hover:scale-110 transition" title="Éditer"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button class="hover:scale-110 transition" title="Supprimer"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  
+
+  <!-- Contenu Vue Graphique -->
+  <div *ngIf="activeTab === 'graphique'" class="bg-white p-4 rounded-lg shadow">
+    <h2 class="text-lg font-semibold mb-4">Vue Graphique</h2>
+    <!-- Remplace ceci par ton graphique -->
+    <div class="h-64 flex items-center justify-center text-gray-500">
+      <app-progess-report></app-progess-report>
+    </div>
+  </div>
+
+  <!-- Contenu Vue Tableau indicateurs -->
+  <div *ngIf="activeTab === 'tableau'" class="bg-white p-4 rounded-lg shadow">
+  
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      
+    
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-left text-sm border border-gray-200">
+          <thead class="bg-[#F5F7FA] text-gray-800 font-semibold">
+            <tr>
+              <th class="py-3 px-4 border-b">Étape</th>
+              <th class="py-3 px-4 border-b">%Pourcentage</th>
+              <th class="py-3 px-4 border-b">Date Mise À Jour</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-700">
+            <tr *ngFor="let ligne of lignes; let i = index" class="border-b">
+              <td class="py-3 px-4">{{ ligne.etape }}</td>
+              <td class="py-3 px-4">
+                <select
+                  [(ngModel)]="ligne.pourcentage"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring focus:border-orange-500"
+                >
+                  <option value="" disabled selected>Sélectionner une pourcentage</option>
+                  <option *ngFor="let pct of pourcentages" [value]="pct">
+                    {{ pct }}
+                  </option>
+                </select>
+              </td>
+              <td class="py-3 px-4">{{ ligne.date }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+  </div>
+</div>

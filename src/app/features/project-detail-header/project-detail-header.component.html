@@ -1,10 +1,13 @@
 <div class="container mx-auto px-4 py-6 ">
-
+  <h1 class="text-2xl font-bold mb-6">
+    Projet : <span class="font-normal">Construction d'un immeuble résidentiel de 10 Étages</span>
+  </h1>
     <!-- Navigation Tabs -->
-    <nav class="flex border-b">
-      <ul class="flex space-x-10 text-lg">
+    <nav class="flex border-b  bg-white  rounded-lg shadow-sm p-6 ">
+      <ul class="flex space-x-10 text-lg ">
         <li [class.border-b-2]="activeTab === 'presentation'" 
-            [class.border-black]="activeTab === 'presentation'" 
+            [class.border-orange-500]="activeTab === 'presentation'" 
+            
             class="pb-2">
           <a (click)="setActiveTab('presentation')" class="font-medium cursor-pointer">Présentation du projet</a>
         </li>
@@ -32,30 +35,32 @@
             class="pb-2">
           <a (click)="setActiveTab('documents')" class="font-medium cursor-pointer">Documents</a>
         </li>
-        <li [class.border-b-2]="activeTab === 'budget'" 
-            [class.border-orange-500]="activeTab === 'budget'"
-            [class.text-orange-500]="activeTab === 'budget'"
-            class="pb-2">
-          <a (click)="setActiveTab('budget')" class="font-medium cursor-pointer">Budget</a>
-        </li>
+       
         <li [class.border-b-2]="activeTab === 'stock'" 
             [class.border-orange-500]="activeTab === 'stock'"
             [class.text-orange-500]="activeTab === 'stock'"
             class="pb-2">
           <a (click)="setActiveTab('stock')" class="font-medium cursor-pointer">Stock</a>
         </li>
+
+        <li [class.border-b-2]="activeTab === 'signalement'" 
+        [class.border-orange-500]="activeTab === 'signalement'"
+        [class.text-orange-500]="activeTab === 'signalement'"
+        class="pb-2">
+      <a (click)="setActiveTab('alert')" class="font-medium cursor-pointer">Signalement</a>
+    </li>
       </ul>
     </nav>
   
     <!-- Project Card -->
-    <div class="mt-10 bg-[#E6E7EC] border rounded-lg p-6 shadow-sm">
+    <!-- <div class="mt-10 bg-[#E6E7EC] border rounded-lg p-6 shadow-sm">
       <h1 class="text-2xl font-bold mb-6">
         Projet : <span class="font-normal">Construction d'un immeuble résidentiel de 10 Étages</span>
       </h1>
   
-      <!-- Stats Cards -->
+     
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
-        <!-- Status Card -->
+        
         <div class="border rounded-lg p-4 flex items-center bg-white">
           <div class="w-1 h-12 bg-orange-300 rounded-full mr-4"></div>
           <div class="flex-1">
@@ -67,7 +72,7 @@
           </div>
         </div>
   
-        <!-- Tasks Card -->
+        
         <div class="border rounded-lg p-4 flex items-center bg-white">
           <div class="w-1 h-12 bg-orange-300 rounded-full mr-4"></div>
           <div class="flex-1">
@@ -80,7 +85,7 @@
           </div>
         </div>
   
-        <!-- Due Date Card -->
+    
         <div class="border rounded-lg p-4 flex items-center bg-white">
           <div class="w-1 h-12 bg-orange-300 rounded-full mr-4"></div>
           <div class="flex-1">
@@ -91,7 +96,7 @@
           </div>
         </div>
   
-        <!-- Budget Card -->
+     
         <div class="border rounded-lg p-4 flex items-center bg-white">
           <div class="w-1 h-12 bg-orange-300 rounded-full mr-4"></div>
           <div class="flex-1">
@@ -102,7 +107,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <!-- Content based on active tab -->
@@ -118,22 +123,26 @@
     }
     @case ('lots') {
       <!-- <app-lots></app-lots> -->
-      <div>Contenu pour lots et sous-traitants</div>
+     <app-lots-subcontractors></app-lots-subcontractors>
     }
-    @case ('budget') {
-      <!-- <app-budget></app-budget> -->
-      <div>Contenu pour budget</div>
-    }
+  
     @case ('stock') {
-      <!-- <app-stock></app-stock> -->
-      <div>Contenu pour stock</div>
+       <app-stock></app-stock> 
+
     }
+     
+    @case ('alert') {
+     <app-project-alert></app-project-alert>
+    
+   }
     @case ('presentation') {
-      <!-- <app-presentation></app-presentation> -->
-      <div>Présentation du projet</div>
+      <app-project-presentation></app-project-presentation>
+      
     }
     @default {
       <div>Sélectionnez un onglet</div>
     }
   }
+<!-- 
+  <app-project-budget></app-project-budget> -->
   

@@ -1,0 +1,61 @@
+<!-- project-oview.component.html -->
+<div class="p-4 bg-white rounded-lg shadow-sm max-w-md mx-auto">
+  <div class="flex justify-between items-center mb-3">
+    <h1 class="text-xl font-bold text-gray-700">Vue d'ensemble des chantiers</h1>
+    <div class="text-gray-500">
+      <img src="assets/images/dashboard-icons/vues.png" alt="vue" srcset="" class="w-6 h-6">
+    </div>
+  </div>
+
+  <!-- Message de chargement -->
+  <div *ngIf="isLoading" class="text-center py-8">
+    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+    <p class="mt-2 text-gray-500">Chargement des données...</p>
+  </div>
+
+  <!-- Message d'erreur -->
+  <div *ngIf="error && !isLoading" class="text-center py-4">
+    <p class="text-red-500 mb-2">{{ error }}</p>
+    <button 
+      (click)="refreshData()" 
+      class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+      Réessayer
+    </button>
+  </div>
+
+  <!-- Données -->
+  <div *ngIf="!isLoading && !error" class="grid grid-cols-2 gap-3">
+    <!-- En cours -->
+    <div class="p-3 bg-[#F5F7FA] rounded-lg">
+      <p class="text-sm text-gray-500 mb-1">En cours</p>
+      <p class="text-4xl font-bold text-gray-700">{{ enCoursCount }}</p>
+    </div>
+
+    <!-- En retard -->
+    <div class="p-3 bg-[#F5F7FA] rounded-lg">
+      <p class="text-sm text-gray-500 mb-1">En retard</p>
+      <p class="text-4xl font-bold text-red-500">{{ enRetardCount }}</p>
+    </div>
+
+    <!-- En attente -->
+    <div class="p-3 bg-[#F5F7FA] rounded-lg">
+      <p class="text-sm text-gray-500 mb-1">En attente</p>
+      <p class="text-4xl font-bold text-amber-500">{{ enAttenteCount }}</p>
+    </div>
+
+    <!-- Terminées -->
+    <div class="p-3 bg-[#F5F7FA] rounded-lg">
+      <p class="text-sm text-gray-500 mb-1">Terminées</p>
+      <p class="text-4xl font-bold text-green-500">{{ termineesCount }}</p>
+    </div>
+  </div>
+
+  <!-- Bouton de rafraîchissement (optionnel) -->
+  <!-- <div *ngIf="!isLoading && !error" class="mt-4 text-center">
+    <button 
+      (click)="refreshData()" 
+      class="text-sm text-blue-500 hover:text-blue-700 transition-colors">
+      🔄 Actualiser
+    </button>
+  </div> -->
+</div>

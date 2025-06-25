@@ -1,46 +1,100 @@
 <!-- human-resources.component.html -->
-<div class="bg-white rounded-lg shadow-sm p-6">
+<div class=" bg-[#F5F7FA] rounded-lg shadow-sm p-6">
   <!-- Header -->
-  <div class="flex justify-between items-center py-4 border-b">
-  <div class="pb-4  border-gray-200">
+
+<div class="flex justify-between">
+  <div class="pb-4  border-gray-200 " >
     <h1 class="text-xl font-semibold text-gray-800">Équipe de construction</h1>
     <p class="text-gray-600 text-sm mt-1">
       Retrouvez en un clin d'œil tous les membres de votre équipe de construction.
     </p>
   </div>
+  <button class="flex items-center justify-between text-white bg-orange-500 rounded-md hover:bg-orange-600 btn-ajout">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+    </svg>
+    Nouveau Membre
+  </button>
+</div> 
+
+  <div class="flex justify-between items-center py-4 border-b">
+ 
 
   <!-- Controls -->
 
-    <div class="flex space-x-1">
-      <button class="flex items-center text-gray-600 px-8 py-2 mx-10 border-gray-300 rounded-md hover:bg-gray-50">
+  <div class="flex flex-wrap gap-4 mb-8">
+    <!-- Barre de recherche -->
+    <div class="relative flex-grow max-w-xs">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+  
+
+      <input 
+        type="text" 
+        [(ngModel)]="searchQuery"
+        (input)="searchProjects()"
+        class="block w-[302px] h-[48px] pl-10  px-4 py-2 border border-gray-300 rounded-[8px] p-12 leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500" 
+        placeholder="Rechercher par nom ">
+    </div>
+
+    <!-- Filtre par période -->
+    <div class="relative">
+ 
+     <button 
+        class="flex justify-between items-center w-[151px] h-[48px] px-4 py-2 border border-gray-300 rounded-[8px] bg-white text-gray-700 focus:outline-none p-12"
+        (click)="filterByPeriod('')">
+        <span>Période</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </button>
+      <!-- Dropdown de période (à implémenter) -->
+    </div>
+
+    <!-- Filtre par statut -->
+    <div class="relative">
+      <button 
+        class="flex justify-between items-center w-[139px] h-[48px] px-4 py-2 border border-gray-300 rounded-[10px] bg-white text-gray-700 focus:outline-none p-12"
+        (click)="filterByStatus('')">
+        <span>Statut</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </button>
+      <!-- Dropdown de statut (à implémenter) -->
+    </div>
+  </div>
+
+
+    <div class="flex  flex-wrap gap-4 mb-8">
+      <button class="flex items-center  justify-between  w-[151px] h-[48px] px-4 py-2 border border-gray-300 rounded-[8px] bg-white text-gray-700 focus:outline-none p-12">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
         </svg>
         Supprimer
       </button>
-      <button class="flex items-center text-gray-600 px-8 py-2 border-gray-300 rounded-md hover:bg-gray-50">
+      <button class="flex items-center justify-between  w-[151px] h-[48px] px-4 py-2 border border-gray-300 rounded-[8px] bg-white text-gray-700 focus:outline-none p-12 ml-4">
         <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
         </svg> -->
         <img src="assets/images/filter-lines.svg" alt="" srcset="" class="mr-2">
-        Filtres
+       <p class="mr-8"> Filtres</p> 
       </button>
-    </div>
-    <div class="flex space-x-1">
-      <button class="flex items-center text-gray-600 px-4 py-2  mx-8 border border-gray-300 rounded-md hover:bg-gray-50">
+   
+    <div class="flex mb-8">
+      <button class="flex items-center text-gray-600 px-4 py-2  mx-8 border border-gray-300 rounded-md hover:bg-white  bg-white">
         <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
         </svg> -->
         <img src="assets/images/download-cloud-02.svg" alt="download" srcset="" class="mr-2">
         Exporter
       </button>
-      <button class="flex items-center text-white px-4 py-2 bg-orange-500 rounded-md hover:bg-orange-600">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
-        </svg>
-        Ajouter un membre
-      </button>
+     
     </div>
+  </div>
   </div>
 
   <!-- Table -->

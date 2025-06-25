@@ -1,16 +1,143 @@
-<div class="layout-container">
-  <div class="sidebar-container">
-    <app-sidebar></app-sidebar>
+<!-- dashboard.component.html (à modifier) -->
+ 
+<div class="container p-6">
+  <!-- Entête du tableau de bord -->
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-gray-700">Tableau de bord</h1>
+    <div class="flex gap-4">
+      <div class="relative">
+        <input
+          type="text"
+          placeholder="Rechercher par projet"
+          class="pl-10 pr-4 py-2 border border-gray-300 rounded-md w-64 focus:outline-none"
+        >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-2.5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="relative">
+        <select class="appearance-none pl-4 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none">
+          <option>2025</option>
+          <option>2024</option>
+        </select>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute right-3 top-2.5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </div>
+    </div>
   </div>
   
-  <div class="right-container">
-    <div class="header-container">
-      <app-header></app-header>
-    </div>
 
-    <div class="content-container">
-      <router-outlet></router-outlet>
+  <!-- Première rangée -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <!-- Vue d'ensemble des chantiers -->
+    <app-project-oview 
+  [chantiersSummary]="chantiersSummary"
+  [selectedPropertyId]="selectedPropertyId"
+  [currentUserId]="currentUserId"
+  *ngIf="canLoadData">
+</app-project-oview>
+    <!-- Taux moyen d'avancement -->
+    <app-avaragerate-avancement>
+      [currentUser]="currentUser"
+    </app-avaragerate-avancement>
     
+   
+    <!-- Budget global -->
+    <app-overall-budget
+  
+  [propertyId]="selectedPropertyId"
+  [promoterId]="currentUserId"
+  [useApiData]="true"
+></app-overall-budget>
+
+  
+  </div>
+
+  <!-- Deuxième rangée -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <!-- Alertes stock matériaux -->
+    <app-material-stock-alert></app-material-stock-alert>
+    <!-- État d'avancement -->
+   <app-progess-report></app-progess-report>
+    
+    <!-- Incidents signalés -->
+    <app-incidents-chart></app-incidents-chart>
+     
+    
+  </div>
+
+  <!-- Troisième rangée -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <!-- Tâches critiques à échéance -->
+    <app-critical-task ></app-critical-task>
+    <!-- Photos récentes -->
+<app-photo-project [photos]="photosRecentes"></app-photo-project>
+    <!-- Résumé des performances -->
+    <!-- <div class="bg-white rounded-lg shadow p-4">
+
+      
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Résumé des performances</h3>
+      <div class="grid grid-cols-3 gap-4">
+        <div class="text-center">
+          <p class="text-sm text-gray-500">Avancement moyen</p>
+          <p class="text-xl font-bold text-blue-600">{{performancesSummary.averageProgress}}%</p>
+        </div>
+        <div class="text-center">
+          <p class="text-sm text-gray-500">Budget consommé</p>
+          <p class="text-xl font-bold text-green-600">{{performancesSummary.budgetConsumed}}%</p>
+        </div>
+        <div class="text-center">
+          <p class="text-sm text-gray-500">Incidents</p>
+          <p class="text-xl font-bold text-red-600">{{performancesSummary.incidents}}</p>
+        </div>
+        <div class="text-center">
+          <p class="text-sm text-gray-500">Présence moyenne</p>
+          <p class="text-xl font-bold text-purple-600">{{performancesSummary.averagePresence}}%</p>
+        </div>
+        <div class="text-center">
+          <p class="text-sm text-gray-500">Tâches en retard</p>
+          <p class="text-xl font-bold text-orange-600">{{performancesSummary.delayedTasks}}</p>
+        </div>
+        <div class="text-center">
+          <p class="text-sm text-gray-500">Alertes matériaux</p>
+          <p class="text-xl font-bold text-yellow-600">{{performancesSummary.materialsAlerted}}</p>
+        </div>
+      </div>
+    </div> -->
+    <div class="p-4 bg-white rounded-lg shadow-sm max-w-md mx-auto h-[305px]">
+      <div class="flex justify-between items-center mb-0">
+        <h2 class="text-lg font-medium text-gray-700">Résumé des performances</h2>
+        <div class="p-2">
+          <i class="fa-solid fa-chart-line"></i>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-2">
+        <div class="bg-gray-100 p-3 rounded-lg">
+          <div class="text-sm text-gray-500 mb-1">Taux moyen d'avancement</div>
+          <div class="text-2xl font-bold text-gray-700">68%</div>
+        </div>
+        <div class="bg-gray-100 p-2 rounded-[8px]">
+          <div class="text-sm text-gray-500 mb-1">Budget consommé</div>
+          <div class="text-2xl font-bold text-gray-700">70%</div>
+        </div>
+        <div class="bg-gray-100 p-2 rounded-lg">
+          <div class="text-sm text-gray-500 mb-1">Incidents (7j)</div>
+          <div class="text-2xl font-bold text-gray-700">12</div>
+        </div>
+        <div class="bg-gray-100 p-2 rounded-lg">
+          <div class="text-sm text-gray-500 mb-1">Présence moyenne</div>
+          <div class="text-2xl font-bold text-gray-700">89%</div>
+        </div>
+        <div class="bg-gray-100 p-2 rounded-lg">
+          <div class="text-sm text-gray-500 mb-1">Tâches en retard</div>
+          <div class="text-2xl font-bold text-gray-700">7</div>
+        </div>
+        <div class="bg-gray-100 p-2 rounded-lg">
+          <div class="text-sm text-gray-500 mb-1">Matériaux en alerte</div>
+          <div class="text-2xl font-bold text-gray-700">17</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,54 @@
+<div class="p-4 bg-white rounded-lg shadow-sm max-w-md mx-auto h-64">
+  <div class="flex items-center justify-between mb-3">
+    <h2 class="text-slate-800 text-2xl font-semibold">Taux moyen d'avancement</h2>
+    <button class="text-gray-500 rounded-full p-1 hover:bg-gray-100">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </button>
+  </div>
+  
+  <div class="relative flex justify-center">
+    <!-- Conteneur de la jauge -->
+    <div class="w-64 h-32 relative">
+      <!-- SVG pour le demi-cercle -->
+      <svg class="w-full h-full" viewBox="0 0 100 50">
+        <!-- Arc de fond (gris clair) -->
+        <path
+          d="M5,50 A45,45 0 0,1 95,50"
+          fill="none"
+          stroke="#EDF2F7"
+          stroke-width="10"
+          stroke-linecap="round"
+        />
+        
+        <!-- Arc de progression (orange) -->
+        <path
+          d="M5,50 A45,45 0 0,1 95,50"
+          fill="none"
+          [attr.stroke]="progressColor"
+          stroke-width="10"
+          stroke-linecap="round"
+          [attr.stroke-dasharray]="circumference"
+          [attr.stroke-dashoffset]="dashOffset"
+        />
+        
+        <!-- Point orange à la fin de l'arc -->
+        <circle
+          [attr.cx]="pointX"
+          [attr.cy]="pointY"
+          r="5"
+          [attr.fill]="progressColor"
+        />
+      </svg>
+      
+      <!-- Texte de pourcentage central -->
+      <div class="absolute inset-0 flex flex-col items-center justify-center pt-4">
+        <span class="text-slate-800 text-4xl font-bold">{{progressValue}}%</span>
+        <span class="text-slate-700 text-sm">Taux moyen</span>
+      </div>
+    </div>
+  </div>
+ 
+  
+</div>

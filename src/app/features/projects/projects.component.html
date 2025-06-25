@@ -1,117 +1,295 @@
-
- <app-dossiers></app-dossiers>
-<div class="container mx-auto px-4 py-6">
-  <!-- En-tête avec titre et bouton d'ajout -->
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-bold text-gray-800"><i class="fa-solid fa-list-check mr-2"></i>La liste des projets  en cours </h1>
-    <button class="flex items-center px-4 py-2 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50">
-      <span class="text-lg mr-2">+</span>
-      <span>Ajouter un nouveau projet</span>
+<div class="container mx-auto p-4 bg-[#F5F7FA]">
+  <!-- Titre et bouton Nouveau Projet -->
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+    <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">Projets en cours</h1>
+    
+    <!-- Modal toggle -->
+    <button
+      class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-[10px] flex items-center w-full sm:w-[192px] h-[51px] justify-center"
+      [routerLink]="['/nouveau-projet']" 
+      type="button">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      Nouveau Projet
     </button>
   </div>
 
   <!-- Description -->
-  <div class="mb-8">
-    <p class="text-gray-700">
-      Consultez la liste de vos chantiers actuellement en cours et suivez leur avancement en temps réel. 
-    </p>
-  </div>
+  <p class="text-gray-600 mb-6 text-sm sm:text-base">
+    Consultez la liste de vos chantiers actuellement en cours et suivez leur avancement en temps réel.
+  </p>
 
-  <div class="flex space-x-4 mb-6">
-    <div class="relative">
-      <button 
-        class="flex items-center justify-between bg-white px-6 py-3 rounded shadow w-36"
-        (click)="toggleFiltre('periode')">
-        <span>Période</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+  <!-- Formulaire de recherche et filtres -->
+  <form [formGroup]="searchForm" class="flex flex-col sm:flex-row flex-wrap gap-4 mb-8">
+    <!-- Barre de recherche -->
+    <div class="relative flex-grow max-w-full sm:max-w-xs">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
-      </button>
-      <!-- Dropdown menu for période -->
-    </div>
-
-    <div class="relative">
-      <button 
-        class="flex items-center justify-between bg-white px-6 py-3 rounded shadow w-36"
-        (click)="toggleFiltre('statut')">
-        <span>Statut</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-        </svg>
-      </button>
-      <!-- Dropdown menu for statut -->
-    </div>
-  </div>
-
-  <!-- Grille de projets -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    <!-- Carte de projet (répétée pour chaque projet) -->
-    <div *ngFor="let projet of projets" class="bg-[#F4F5FC] rounded-lg overflow-hidden shadow-md w-[450px]"> 
-      <!-- Image du projet -->
-      <div class="h-50 overflow-hidden">
-        <img [src]="projet.image" alt="Image du projet" class="w-full h-full object-cover">
       </div>
+      
+      <input 
+        type="text" 
+        formControlName="search"
+        (input)="onSearch()"
+        class="block w-full sm:w-[302px] h-[48px] pl-10 px-4 py-2 border border-gray-300 rounded-[8px] leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500" 
+        placeholder="Rechercher par projet">
+    </div>
 
-      <!-- Informations du projet avec indicateur de progression -->
-      <div class="p-5 relative " >
-        <!-- Indicateur de progression circulaire - Placé à gauche du titre -->
-        <div class="flex mb-4">
-          <div class="relative w-16 h-16 mr-3">
-            <svg class="w-16 h-16" viewBox="0 0 100 100">
-              <!-- Cercle de fond gris -->
-              <circle cx="50" cy="50" r="45" fill="none" stroke="#e6e6e6" stroke-width="10"></circle>
-              <!-- Cercle de progression coloré -->
-              <circle 
-                cx="50" 
-                cy="50" 
-                r="45" 
-                fill="none" 
-                [attr.stroke]="getProgressColor(projet.progression)" 
-                stroke-width="10"
-                stroke-linecap="round"
-                transform="rotate(-90 50 50)"
-                [attr.stroke-dasharray]="calculateCircleProgress(projet.progression)"
-              ></circle>
-              <!-- Texte de pourcentage au centre -->
-              <text x="50" y="55" text-anchor="middle" fill="#444" font-size="20" font-weight="bold">{{projet.progression}}%</text>
-            </svg>
-          </div>
-          <div class="flex-grow">
-            <h2 class="text-lg font-semibold text-gray-800">{{ projet.titre }}</h2>
-          </div>
-          <button class="text-gray-500 hover:text-gray-700 ml-2 self-start">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-            </svg>
-          </button>
+    <!-- Filtre par période -->
+    <div class="relative w-full sm:w-auto">
+      <select 
+        formControlName="period"
+        class="flex justify-between items-center w-full sm:w-[200px] h-[48px] px-4 py-2 border border-gray-300 rounded-[8px] bg-white text-gray-700 focus:outline-none appearance-none">
+        <option value="all">Toutes les périodes</option>
+        <option value="current-year">Cette année</option>
+        <option value="last-year">Année dernière</option>
+        <option value="older">Plus ancien</option>
+      </select>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </div>
+
+    <!-- Filtre par statut -->
+    <div class="relative w-full sm:w-auto">
+      <select 
+        formControlName="status"
+        class="flex justify-between items-center w-full sm:w-[180px] h-[48px] px-4 py-2 border border-gray-300 rounded-[10px] bg-white text-gray-700 focus:outline-none appearance-none">
+        <option value="all">Tous les statuts</option>
+        <option value="active">Actif</option>
+        <option value="inactive">Inactif</option>
+        <option value="completed">Terminé</option>
+        <option value="in-progress">En cours</option>
+      </select>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </div>
+
+    <!-- Bouton de réinitialisation -->
+    <!-- <button 
+      type="button"
+      (click)="onClearSearch()"
+      class="px-4 py-2 border border-gray-300 rounded-[8px] bg-white text-gray-700 hover:bg-gray-50 focus:outline-none">
+      Effacer
+    </button> -->
+  </form>
+
+  <!-- Statistiques (calculées dynamiquement) -->
+  <!-- <div class="bg-white rounded-lg p-4 mb-6 shadow-sm">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+      <div>
+        <div class="text-2xl font-bold text-gray-800">{{ pagination().totalElements }}</div>
+        <div class="text-sm text-gray-600">Total</div>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-green-600">
+          {{ projects().filter(p => p.available).length }}
         </div>
-
-        <!-- Description du projet -->
-        <p class="text-gray-600 mb-6">{{ projet.description }}</p>
-
-        <!-- Détails du projet -->
-        <div class="flex justify-between text-sm text-gray-500 border-t pt-4">
-          <div>
-            <!-- <p class="font-bold">{{ projet.participants }}</p> -->
-            <button 
-            class="bg-[#FF5C0212]
-            text-gray-800 px-6 py-2 rounded"   (click)="onSubmit()"
-            >
-            Détails
-          </button>
-            <!-- <Details></Details> -->
-          </div>
-          <div class="text-center">
-            <p class="font-bold">{{ projet.dateDebut }}</p>
-            <p>Début</p>
-          </div>
-          <div class="text-right">
-            <p class="font-bold">{{ projet.dateFin }}</p>
-            <p>Fin prévue</p>
-          </div>
+        <div class="text-sm text-gray-600">Actifs</div>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-blue-600">
+          {{ projects().filter(p => p.progress > 0 && p.progress < 100).length }}
         </div>
+        <div class="text-sm text-gray-600">En cours</div>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-orange-600">
+          {{ projects().filter(p => p.progress >= 100).length }}
+        </div>
+        <div class="text-sm text-gray-600">Terminés</div>
       </div>
     </div>
+  </div> -->
+
+  <!-- Message d'erreur -->
+  <div *ngIf="error() as errorMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+    {{ errorMessage }}
+    <button (click)="onRefresh()" class="ml-4 underline hover:no-underline">
+      Réessayer
+    </button>
   </div>
 
+  <!-- Liste des projets avec scroll container -->
+  <div class="projects-container overflow-y-auto max-h-[800px]" (scroll)="onScroll($event)">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      <!-- Carte projet responsive -->
+      <div *ngFor="let project of projects(); trackBy: trackByProjectId" 
+           class="bg-white rounded-[10px] overflow-hidden shadow-md cursor-pointer hover:shadow-lg transition-shadow duration-300 w-full max-w-[410px] mx-auto h-full"
+           [ngClass]="getStatusClass(project)"
+           (click)="onProjectClick(project)">
+
+     <div class="h-40 sm:h-48 overflow-hidden">
+  <ng-container *ngIf="project; else loading">
+    <!-- <ng-container *ngIf="tabImagesApi.length > 0; else noImages">
+      <img
+        [src]="tabImagesApi[currentImageIndex]"
+        alt="Image du projet"
+        class="w-full h-full object-cover"
+        width="400"
+        (error)="onImageError($event)"
+        (load)="onImageLoad($event)"
+      />
+    </ng-container> -->
+
+    <div *ngIf="project.plan" class="mt-3 w-full h-full " >
+      <img 
+        [src]="project.plan"
+        (error)="onImageError($event)"
+        (load)="onImageLoad($event)"
+        alt="plan" 
+        class="w-full h-full object-cover rounded-lg">
+    </div>
+    
+    <!-- Aucun visuel disponible -->
+    <ng-template #noImages>
+      <div class="w-full h-full bg-gray-100 flex items-center justify-center">
+        <p class="text-gray-500 text-sm">Aucune image disponible</p>
+      </div>
+    </ng-template>
+  </ng-container>
+
+  <!-- Chargement en cours -->
+  <ng-template #loading>
+    <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+      <img
+        src="assets/images/architecte.png"
+        alt="Chargement en cours..."
+        class="w-full h-full object-cover opacity-50"
+      />
+    </div>
+  </ng-template>
+</div>
+
+        <!-- Informations du projet -->
+        <div class="p-3 sm:p-4 flex flex-col">
+          <h2 class="text-base sm:text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
+            {{ project.title }}
+          </h2>
+          
+          <!-- Info flex container responsive -->
+          <div class="flex flex-col sm:flex-row sm:justify-between gap-2 sm:gap-0 mb-4">
+            <!-- Localisation -->
+            <div class="flex items-start">
+              <img src="assets/images/eva_pin-fill.png" alt="" class="mr-2 mt-1 flex-shrink-0">
+              <span class="text-gray-600 text-xs sm:text-sm line-clamp-1">
+                {{ project.location }}{{ project.address }}
+              </span>
+            </div>
+            
+            <!-- Période -->
+            <div class="flex items-center">
+              <img src="assets/images/Group.png" alt="" class="mr-2 mt-1 flex-shrink-0">
+              <span class="text-gray-600 text-xs sm:text-sm whitespace-nowrap">
+                <!-- {{ project.startDate   }}{{ project.endDate ? ' - ' + project.endDate : '' }} -->
+                {{ project.startDate[2] }}/{{ project.startDate[1] }}/{{ project.startDate[0] }}
+                -
+                {{ project.endDate[2] }}/{{ project.endDate[1] }}/{{ project.endDate[0] }}
+              </span>
+            </div>
+          </div>
+          
+          <!-- Barre de progression -->
+          <div class="mb-1">
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs sm:text-sm font-medium text-gray-700">Progression</span>
+              <span class="text-xs sm:text-sm font-medium text-gray-700">{{ formatProgress(project.progress) }}</span>
+            </div>
+            <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div 
+                [style.width.%]="project.progress"
+                [ngStyle]="{ 'background': getGradientBackground(project.progress) }"
+                [ngClass]="getProgressBarClass(project.progress)"
+                class="h-full rounded-full transition-all duration-500">
+              </div>
+            </div>
+          </div>
+          
+
+          <!-- Statut du projet -->
+          <!-- <div class="mt-2 flex justify-between items-center"> -->
+            <!-- <span class="px-2 py-1 rounded-full text-xs font-medium"
+                  [ngClass]="{
+                    'bg-green-100 text-green-800': project.available && project.progress < 100,
+                    'bg-red-100 text-red-800': !project.available,
+                    'bg-blue-100 text-blue-800': project.progress === 100,
+                    'bg-yellow-100 text-yellow-800': project.progress > 0 && project.progress < 100
+                  }">
+              {{ project.available ? (project.progress === 100 ? 'Terminé' : 'Actif') : 'Inactif' }}
+            </span> -->
+            
+            <!-- Indicateur de disponibilité -->
+            <!-- <div class="flex items-center">
+              <div class="w-2 h-2 rounded-full mr-2"
+                   [ngClass]="{
+                     'bg-green-500': project.available,
+                     'bg-red-500': !project.available
+                   }"></div> -->
+              <!-- <span class="text-xs text-gray-500"> -->
+                <!-- {{ project.available ? 'Disponible' : 'Non disponible' }} -->
+              <!-- </span> -->
+            <!-- </div> -->
+          <!-- </div> -->
+
+
+
+        </div>
+      </div>
+    </div>
+
+    
+
+    <!-- Loading indicator -->
+    <div *ngIf="loading()" class="flex justify-center items-center py-8">
+      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+    </div>
+
+    <!-- Message de fin -->
+    <div class="text-center py-4">
+      <div *ngIf="!pagination().hasMore && projects().length > 0" 
+           class="text-gray-500 text-sm">
+        Tous les projets ont été chargés ({{ pagination().totalElements }} projets)
+      </div>
+    </div>
+
+    <!-- No results message -->
+    <div *ngIf="projects().length === 0 && !loading()" 
+         class="text-center py-12">
+      <div class="text-gray-400 text-lg mb-2">Aucun projet trouvé</div>
+      <div class="text-gray-500 text-sm">Essayez de modifier vos critères de recherche</div>
+      <button (click)="onClearSearch()" 
+              class="mt-4 px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors">
+        Effacer les filtres
+      </button>
+    </div>
+  </div>
+
+  <!-- Pagination info -->
+  <div class="mt-6 flex justify-between items-center text-sm text-gray-600">
+    <div>
+      Affichage de {{ projects().length }} sur {{ pagination().totalElements }} projets
+    </div>
+    
+    <!-- Options de taille de page -->
+    <div class="flex items-center gap-2">
+      <span>Projets par page :</span>
+      <select (change)="onPageSizeChange($event)" 
+              [value]="pagination().pageSize"
+              class="border border-gray-300 rounded px-2 py-1">
+        <option *ngFor="let size of pageSizeOptions" [value]="size">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+    <div *ngIf="loading()" class="flex justify-center items-center py-6">
+      <div class="animate-spin rounded-full h-10 w-10 border-t-4 border-blue-500 border-solid"></div>
+    </div>
+    
+  </div>
+
+  
 </div>

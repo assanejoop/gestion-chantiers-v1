@@ -1,0 +1,14 @@
+.surfaceProjet
+{
+/* box-shadow: 3px 3px 3px 0px #00000008;
+box-shadow: 0px -3px 32px 0px #00000008; */
+width: 210px;
+height: 71px;
+border-radius: 8px;
+gap: 4px;
+padding: 14px;
+
+background-color:  #FFFFFF;
+margin-left: 10px;
+
+}

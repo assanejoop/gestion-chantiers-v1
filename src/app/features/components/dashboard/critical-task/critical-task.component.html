@@ -1,0 +1,23 @@
+<div class="p-4 bg-white rounded-lg shadow-sm max-w-md mx-auto h-[305px]">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-medium text-gray-700">Tâches critiques à échéance</h2>
+      <div class="p-2">
+        <img src="assets/images/dashboard-icons/task.png" alt="" srcset="">
+      </div>
+    </div>
+    <div class="space-y-4 ">
+      <div *ngFor="let task of tasks" class="flex items-start gap-3">
+        <div class="mt-1 w-2 h-2 rounded-full"  [ngClass]="getStatusColor(task.status)"></div>
+        <div class="flex-1 px-4 ">
+          <div class="flex justify-between ">
+            <h3 class="font-medium ">{{ task.nom }}</h3>
+            <span class="text-xs px-2 py-1 rounded" [ngClass]="getStatusBadgeClass(task.status)">{{ task.status }}</span>
+          </div>
+          <p class="text-sm text-gray-500">
+            Échéance : {{ task.echeance }}
+            <ng-container *ngIf="task.jours > 0">({{ task.jours }} j restants)</ng-container>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>

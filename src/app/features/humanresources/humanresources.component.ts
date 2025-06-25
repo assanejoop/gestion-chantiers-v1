@@ -30,6 +30,10 @@ export class HumanResourcesComponent implements OnInit {
   totalMembers = 0;
   startIndex = 1;
   endIndex = 10;
+  searchQuery: string = '';
+ 
+  selectedPeriod: string = '';
+  selectedStatus: string = '';
 
   ngOnInit() {
     this.loadTeamMembers();
@@ -195,5 +199,23 @@ export class HumanResourcesComponent implements OnInit {
     }
     
     return pages;
+  }
+
+  // Filtre par Periode 
+  filterByPeriod(period: string): void {
+    this.selectedPeriod = period;
+    // Implémenter la logique de filtrage
+  }
+
+  // Filtre par Status
+  filterByStatus(status: string): void {
+    this.selectedStatus = status;
+    // Implémenter la logique de filtrage
+  }
+
+  // Recherche 
+  searchProjects(): void {
+    // Implémenter la logique de recherche
+    console.log('Recherche:', this.searchQuery);
   }
 }

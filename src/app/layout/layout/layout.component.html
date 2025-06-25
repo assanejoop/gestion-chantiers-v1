@@ -1,0 +1,27 @@
+<!-- Layout responsive avec sidebar qui monte jusqu'en haut -->
+<div class="flex h-screen overflow-hidden bg-[#F5F7FA]">
+  <!-- Sidebar qui prend toute la hauteur -->
+  <aside class="w-72 bg-white shadow-md h-screen flex-shrink-0 hidden md:block">
+    <app-sidebar></app-sidebar>
+  </aside>
+  
+  <!-- Colonne de contenu avec header et main -->
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <!-- Header décalé à droite -->
+    <header class="bg-white shadow z-10">
+      <app-header></app-header>
+    </header>
+    
+    <!-- Zone de contenu principale qui défile -->
+    <main class="flex-1 overflow-y-auto bg-gray-100 p-4">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  
+  <!-- Pour les mobiles - sidebar qui apparaît comme un drawer -->
+  <div class="md:hidden fixed inset-0 bg-black bg-opacity-50 z-50" *ngIf="sidebarOpen">
+    <div class="w-64 bg-white h-full">
+      <app-sidebar></app-sidebar>
+    </div>
+  </div>
+</div>

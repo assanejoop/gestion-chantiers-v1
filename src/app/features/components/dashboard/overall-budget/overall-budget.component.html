@@ -1,0 +1,47 @@
+<div class="p-4 bg-white rounded-lg shadow-sm max-w-md mx-auto h-64">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-lg font-medium text-gray-700">Budget global</h2>
+    <div class="p-2">
+      <img src="assets/images/dashboard-icons/budget.png" alt="budget-icons" srcset="">
+    </div>
+  </div>
+  
+  <!-- Canvas ne sera rendu que côté client -->
+  <div class="flex justify-start relative pl-4">
+    <div class="relative" style="width: 150px; height: 150px;">
+      <!-- Conditionnel pour le canvas -->
+      <canvas #budgetChart *ngIf="isBrowser && !loading"></canvas>
+      
+      <!-- Fallback pour le SSR ou pendant le chargement -->
+      <div *ngIf="!isBrowser || loading" class="w-full h-full rounded-full border-4 border-gray-200 flex items-center justify-center">
+        <span *ngIf="loading" class="text-gray-400">Chargement...</span>
+      </div>
+      
+      <div class="absolute inset-0 flex flex-col justify-center items-center">
+        <div class="text-xl font-bold">{{ consumedPercentage || 0 }}%</div>
+        <div class="text-sm text-gray-500">consommé</div>
+      </div>
+    </div>
+    <div class="absolute bg-gray-900 text-white p-2 rounded-lg text-sm budgetData">
+      <p class="myspan">Consommé</p>
+      <span class="text-xs">
+        {{ formatCurrency(totalConsumed || 0, true) }}  
+      </span> 
+    </div>
+  </div>
+  
+  <div class="budget-indicator ml-auto">
+    <div class="flex items-end ml-auto">
+      <span class="w-2 h-2 inline-block rounded-full bg-[#FF5C02] mr-1"></span>
+      <span class="budget-content">Consommé : {{ formatCurrency(totalConsumed || 0) }}</span>
+    </div>
+    <div class="text-sm text-gray-600 mt-1 ml-4 budget-content">
+      <span class="budget-reste">Restant : {{ formatCurrency(totalRemaining || 0) }}</span>  
+    </div>
+  </div>
+
+  <!-- Affichage des erreurs -->
+  <div *ngIf="error" class="mt-2 text-red-500 text-sm">
+    {{ error }}
+  </div>
+</div>

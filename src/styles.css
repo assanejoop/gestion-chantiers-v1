@@ -3,3 +3,7 @@
 @tailwind utilities;
 
 
+:root {
+    --orange-color: #FF5C02;
+  }
+  

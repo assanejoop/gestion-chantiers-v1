@@ -3,6 +3,13 @@ import { CommonModule } from '@angular/common';
 import { TaskBoardComponent } from "../task-board/task-board.component";
 import { TeamListComponent } from '../team-list/team-list.component';
 import { DocumentsComponent } from '../documents/documents.component';
+import { LotsSubcontractorsComponent } from '../lots-subcontractors/lots-subcontractors.component';
+import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from '../../core/services/breadcrumb-service.service';
+import { StockComponent } from "../components/project/stock/stock.component";
+import { ProjectPresentationComponent } from '../components/project/project-presentation/project-presentation.component';
+import { ProjectAlertComponent } from "../components/project/project-alert/project-alert.component";
+
 
 
 interface ProjectInfo {
@@ -21,12 +28,12 @@ interface ProjectInfo {
 @Component({
   selector: 'app-project-detail-header',
   standalone: true,
-  imports: [CommonModule, 
+  imports: [CommonModule,
     TaskBoardComponent,
     TeamListComponent,
-    DocumentsComponent
-
-  ],
+    DocumentsComponent,
+    LotsSubcontractorsComponent, StockComponent,
+    ProjectPresentationComponent, ProjectAlertComponent],
   templateUrl: './project-detail-header.component.html',
   styleUrl: './project-detail-header.component.css'
 })
@@ -53,16 +60,31 @@ export class ProjectDetailHeaderComponent implements OnInit {
     { name: 'Équipe', active: false, link: '#' },
     { name: 'Lots et sous-traitants', active: false, link: '#' },
     { name: 'Documents', active: false, link: '#' },
-    { name: 'Budget', active: false, link: '#' },
-    { name: 'Stock', active: false, link: '#' }
+    { name: 'Stock', active: false, link: '#' },
+    { name: 'Signalenment', active: false, link: '#' },
   ];
 
-  constructor() { }
+ 
+
+  projectId: string | null = null;
+stockAlerts: any;
+  
+  constructor(
+    private route: ActivatedRoute,
+    private breadcrumbService: BreadcrumbService
+  ) {}
 
   ngOnInit(): void {
-    // Vous pouvez ajouter du code d'initialisation ici si nécessaire
-    // Par exemple, récupérer les données du projet depuis une API
+    // Récupère l'ID du projet depuis les paramètres de l'URL
+    this.projectId = this.route.snapshot.paramMap.get('id');
+    
+    // Met à jour le fil d'Ariane pour inclure la page de détail du projet
+    this.breadcrumbService.setBreadcrumbs([
+      { label: 'Projets', path: '/projects' },
+      { label: `Détail projet ${this.projectId}`, path: `/projects/${this.projectId}` }
+    ]);
   }
+  
 
   setActiveTab(tab: string): void {
     this.activeTab = tab;

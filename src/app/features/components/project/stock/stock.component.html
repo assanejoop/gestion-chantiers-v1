@@ -1,0 +1,512 @@
+<div class="p-6 bg-gray-50 min-h-screen" (click)="closeDropdown()"> 
+  <!-- Header -->
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-2xl font-semibold text-gray-800">Inventaire des matériaux</h1>
+    <button 
+      (click)="openNewMaterialModal()"
+      class="bg-white border border-orange-500 text-orange-500 px-4 py-2 rounded-lg hover:bg-orange-50 flex items-center gap-2">
+      <span class="text-xl">+</span>
+      Nouveau matériel
+    </button>
+  </div>
+
+  <div class="flex gap-8">
+    <!-- Main Content -->
+    <div class="flex-1">
+      <!-- Tabs -->
+      <div class="flex mb-6 border-b border-gray-200">
+        <button 
+        (click)="setActiveTab('inventaires')"
+        [class]="activeTab === 'inventaires' ? 'border-b-2 border-orange-500 text-orange-600 pb-4 px-4' : 'text-gray-600 pb-4 px-4 hover:text-gray-800'"
+        class="flex items-center gap-2">
+        <span class="text-orange-500" >📦</span>
+        
+        <a (click)="setActiveTab('inventaires')" class="font-medium cursor-pointer">Inventaires</a>
+      </button>
+      <button 
+        (click)="setActiveTab('commandes')"
+        [class]="activeTab === 'commandes' ? 'border-b-2 border-orange-500 text-orange-600 pb-4 px-4' : 'text-gray-600 pb-4 px-4 hover:text-gray-800'"
+        class="flex items-center gap-2">
+        <span>🛒</span>
+        <a (click)="setActiveTab('commande')" class="font-medium cursor-pointer">Commande</a>
+      </button>
+      <button 
+        (click)="setActiveTab('livraisons')"
+        [class]="activeTab === 'livraisons' ? 'border-b-2 border-orange-500 text-orange-600 pb-4 px-4' : 'text-gray-600 pb-4 px-4 hover:text-gray-800'"
+        class="flex items-center gap-2">
+        <span>🚚</span>
+        <a (click)="setActiveTab('livraisons')" class="font-medium cursor-pointer">Livraison</a>
+      </button>
+      <button 
+        (click)="setActiveTab('statistiques')"
+        [class]="activeTab === 'statistiques' ? 'border-b-2 border-orange-500 text-orange-600 pb-4 px-4' : 'text-gray-600 pb-4 px-4 hover:text-gray-800'"
+        class="flex items-center gap-2">
+        <span>📊</span>
+        Statistiques
+      </button>
+       </div>
+
+      
+      <div class="flex gap-4 mb-6">
+        <div class="relative flex-1">
+          <input 
+            type="text" 
+            placeholder="Rechercher un matériau..."
+            [(ngModel)]="searchTerm"
+            (input)="filterMaterials()"
+            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"> 
+          <span class="absolute left-3 top-3 text-gray-400">🔍</span>
+        </div>
+         <select 
+          [(ngModel)]="selectedCategory"
+          (change)="filterMaterials()"
+          class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+          <option value="">Catégorie</option>
+          <option value="beton">Béton</option>
+          <option value="acier">Acier</option>
+          <option value="maconnerie">Maçonnerie</option>
+          <option value="finition">Finition</option>
+          <option value="plomberie">Plomberie</option>
+          <option value="revetement">Revêtement</option>
+        </select> 
+        <select 
+          [(ngModel)]="selectedStockStatus"
+          (change)="filterMaterials()"
+          class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+          <option value="">État du stock</option>
+          <option value="CRITICAL">Critique</option>
+          <option value="LOW">Avertissement</option>
+          <option value="NORMAL">Normal</option>
+        </select> 
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="loading" class="flex justify-center items-center py-12">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+      </div>
+
+      
+      <!-- Materials Table -->
+      <!-- Tab Content -->
+      @switch (activeTab) {
+        @case ('inventaires') {
+          <div *ngIf="!loading" class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+            <table class="w-full">
+              <thead class="bg-gray-50 border-b border-gray-200">
+                <tr>
+                  <th class="text-left py-4 px-6 font-medium text-gray-700">Matériau</th>
+                  <!-- <th class="text-left py-4 px-6 font-medium text-gray-700">Catégorie</th> -->
+                  <th class="text-left py-4 px-6 font-medium text-gray-700">Stock</th>
+                  <th class="text-left py-4 px-6 font-medium text-gray-700">Unité</th>
+                  <th class="text-left py-4 px-6 font-medium text-gray-700">Seuil</th>
+                  <th class="text-left py-4 px-6 font-medium text-gray-700">État</th>
+                  <th class="text-left py-4 px-6 font-medium text-gray-700">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Utilisation de paginatedMaterials au lieu de materials -->
+                <tr *ngFor="let material of paginatedMaterials; let i = index" class="border-b border-gray-100 hover:bg-gray-50"> 
+                  <!-- Utilisation des méthodes utilitaires du TS -->
+                  <td class="py-4 px-6 font-medium text-gray-900">{{ getMaterialName(material) }}</td>
+                  <!-- <td class="py-4 px-6 text-gray-600">{{ getMaterialCategory(material) || 'N/A' }}</td> -->
+                  <td class="py-4 px-6 font-semibold text-gray-900">{{ getMaterialStock(material) }}</td>
+                  <td class="py-4 px-6 text-gray-600">{{ getMaterialUnit(material) || 'N/A' }}</td>
+                  <td class="py-4 px-6 text-gray-600">{{ getMaterialThreshold(material) }}</td>
+                  <td class="py-4 px-6">
+                    <span [class]="getStatusClass(getMaterialStatus(material))" class="px-3 py-1 rounded-full text-sm font-medium">
+                      {{ getMaterialStatus(material) }}
+                    </span>
+                  </td>
+                  <td class="py-4 px-6 relative">
+                    <button 
+                      (click)="toggleDropdown(i, $event)"
+                      class="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100">
+                      ⋮ 
+                    </button> 
+                    
+                    <!-- Dropdown Menu -->
+                     <div *ngIf="openDropdownIndex === i" 
+                         class="absolute right-0 top-12 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
+                      <div class="py-2">
+                        <button 
+                          (click)="openMovementModal(material)"
+                          class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3">
+                          <span class="text-gray-400">👁️</span>
+                          Voir détails
+                        </button>
+                        <button 
+                          (click)="onAction('modifier', material, $event)"
+                          class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3">
+                          <span class="text-gray-400">✏️</span>
+                          Modifier
+                        </button>
+                        <button 
+                          (click)="openMovementModal(material)"
+                          class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3">
+                          <span class="text-gray-400">⇄</span>
+                          Gérer les mouvements
+                        </button>
+                        <button 
+                          (click)="onAction('commander', material, $event)"
+                          class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3">
+                          <span class="text-gray-400">🛒</span>
+                          Commander
+                        </button>
+                        <button 
+                          (click)="onAction('historique', material, $event)"
+                          class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3">
+                          <span class="text-gray-400">📋</span>
+                          Historique
+                        </button>
+                        <hr class="my-1 border-gray-200">
+                        <button 
+                          (click)="onAction('supprimer', material, $event)"
+                          class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-3">
+                          <span class="text-red-400">🗑️</span>
+                          Supprimer
+                        </button>
+                      </div>
+                    </div> 
+                   </td> 
+                 </tr> 
+                
+                <!-- Empty state -->
+                <tr *ngIf="paginatedMaterials.length === 0">
+                  <td colspan="7" class="py-12 text-center text-gray-500">
+                    <div class="flex flex-col items-center">
+                      <span class="text-6xl mb-4">📦</span>
+                      <span class="text-lg font-medium">Aucun matériau trouvé</span>
+                      <span class="text-sm">Essayez de modifier vos filtres</span>
+                    </div>
+                  </td>
+                </tr> 
+              </tbody>
+            </table>
+            
+            <!-- Pagination -->
+            <div *ngIf="totalPages > 1" class="flex justify-between items-center p-4 border-t border-gray-200">
+              <div class="text-sm text-gray-700">
+                Page {{ currentPage }} sur {{ totalPages }}
+              </div>
+              <div class="flex gap-2">
+                <button 
+                  (click)="currentPage = currentPage - 1"
+                  [disabled]="currentPage <= 1"
+                  class="px-3 py-1 border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50">
+                  Précédent
+                </button>
+                <button 
+                  (click)="currentPage = currentPage + 1"
+                  [disabled]="currentPage >= totalPages"
+                  class="px-3 py-1 border border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50">
+                  Suivant
+                </button>
+              </div>
+            </div> 
+          </div>
+        }
+        @case ('commandes') {
+          <div>c est pour commande</div>
+        }
+        @case ('livraisons') {
+         <div>c est livraisons</div>
+        }
+        @case ('statistiques') {
+          <!-- <app-lots></app-lots> -->
+       <app-statistique></app-statistique>
+        }
+        @default {
+          <div>Sélectionnez un onglet</div>
+        }
+      }
+    </div>
+    
+
+  
+
+    <!-- Right Sidebar -->
+    <div class="w-80">
+      <!-- Stock Alerts -->
+      <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+        <div class="p-4 border-b border-gray-200 flex items-center justify-between">
+          <h3 class="font-semibold text-gray-800">Alertes de stock</h3>
+          <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">
+            {{ stockAlerts.length }}
+          </span>
+        </div>
+        <div class="p-4 space-y-3">
+          <div *ngFor="let alert of stockAlerts" class="flex items-start gap-3 p-3 bg-red-50 rounded-lg border border-red-200">
+            <span class="text-red-500 mt-0.5">⚠️</span>
+            <div class="flex-1">
+              <!-- <div class="text-sm font-medium text-red-800">{{ alert.message }}</div>
+              <div class="text-xs text-red-600 mt-1">{{ alert.createdAt | date:'short' }}</div> -->
+            </div>
+          </div>
+          <div *ngIf="stockAlerts.length === 0" class="text-center text-gray-500 py-4">
+            <span class="text-2xl block mb-2">✅</span>
+            Aucune alerte de stock
+          </div>
+        </div>
+      </div> 
+
+      <!-- Recent Movements -->
+      <!-- <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div class="p-4 border-b border-gray-200 flex items-center justify-between">
+          <h3 class="font-semibold text-gray-800">Mouvements récents</h3>
+          <button class="text-gray-400 hover:text-gray-600">
+            ≡
+          </button>
+        </div>
+        <div class="p-4 space-y-4">
+          <div *ngFor="let movement of recentMovements" class="flex justify-between items-start">
+            <div class="flex-1">
+              <div class="text-sm text-gray-600">{{ movement.date }}, {{ movement.time }}</div>
+              <div class="font-medium" [class]="getMovementTypeClass(movement.type)">
+                {{ movement.type }} - {{ movement.description }}
+              </div>
+            </div>
+            <div class="text-xs text-gray-500 ml-4">{{ movement.location }}</div>
+          </div>
+          <div *ngIf="recentMovements.length === 0" class="text-center text-gray-500 py-4">
+            <span class="text-2xl block mb-2">📋</span>
+            Aucun mouvement récent
+          </div>
+        </div>
+      </div>  -->
+    </div>
+  
+  </div>
+
+  <!-- Modal Overlay pour nouveau matériau -->
+  <div *ngIf="showNewMaterialModal" 
+  class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+  (click)="closeNewMaterialModal()">
+
+<!-- Modal Content -->
+<div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-hidden"
+    (click)="$event.stopPropagation()">
+ 
+ <!-- Modal Header -->
+ <div class="flex items-center justify-between p-6 border-b border-gray-200">
+   <h2 class="text-xl font-semibold text-gray-900">Ajouter un nouveau matériau</h2>
+   <button 
+     (click)="closeNewMaterialModal()"
+     class="text-gray-400 hover:text-gray-600 text-2xl leading-none">
+     ×
+   </button>
+ </div>
+ 
+ <!-- Modal Body -->
+ <div class="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+   <form [formGroup]="materialForm" (ngSubmit)="onSubmit()">
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+       
+       <!-- Nom du matériau -->
+       <div class="md:col-span-1">
+         <label class="block text-sm font-medium text-gray-700 mb-2">
+           Nom du matériau <span class="text-red-500">*</span>
+         </label>
+         <input 
+           type="text" 
+           placeholder="Ex: Ciment Portland"
+           formControlName="label"
+           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+           [class.border-red-500]="isFieldInvalid('label')"
+           [class.focus:ring-red-500]="isFieldInvalid('label')">
+         <div *ngIf="isFieldInvalid('label')" class="mt-1 text-sm text-red-600">
+           {{ getFieldError('label') }}
+         </div>
+       </div>
+       
+       <!-- Quantité actuelle -->
+       <div class="md:col-span-1">
+         <label class="block text-sm font-medium text-gray-700 mb-2">
+           Quantité actuelle <span class="text-red-500">*</span>
+         </label>
+         <input 
+           type="number" 
+           placeholder="Ex: 100"
+           formControlName="quantity"
+           min="0"
+           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+           [class.border-red-500]="isFieldInvalid('quantity')"
+           [class.focus:ring-red-500]="isFieldInvalid('quantity')">
+         <div *ngIf="isFieldInvalid('quantity')" class="mt-1 text-sm text-red-600">
+           {{ getFieldError('quantity') }}
+         </div>
+       </div>
+       
+       <!-- Seuil critique -->
+       <div class="md:col-span-1">
+         <label class="block text-sm font-medium text-gray-700 mb-2">
+           Seuil critique <span class="text-red-500">*</span>
+         </label>
+         <input 
+           type="number" 
+           placeholder="Ex: 10"
+           formControlName="criticalThreshold"
+           min="0"
+           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+           [class.border-red-500]="isFieldInvalid('criticalThreshold')"
+           [class.focus:ring-red-500]="isFieldInvalid('criticalThreshold')">
+         <div *ngIf="isFieldInvalid('criticalThreshold')" class="mt-1 text-sm text-red-600">
+           {{ getFieldError('criticalThreshold') }}
+         </div>
+       </div>
+
+       <!-- ID Unité -->
+       <div class="md:col-span-1">
+        <label class="block text-sm font-medium text-gray-700 mb-2">
+          Unité <span class="text-red-500">*</span>
+        </label>
+        <select
+          formControlName="unitId"
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+          [class.border-red-500]="isFieldInvalid('unitId')"
+          [class.focus:ring-red-500]="isFieldInvalid('unitId')">
+          <option value="">Sélectionnez une unité</option>
+          <option *ngFor="let unit of units" [value]="unit.id">
+            {{ unit.id }} - {{ unit.label }}
+          </option>
+        </select>
+        <div *ngIf="isFieldInvalid('unitId')" class="mt-1 text-sm text-red-600">
+          {{ getFieldError('unitId') }}
+        </div>
+      </div>
+      
+
+       <!-- ID Propriété -->
+      
+
+       <div class="md:col-span-1">
+        <label class="block text-sm font-medium text-gray-700 mb-2">
+          Propriete <span class="text-red-500">*</span>
+        </label>
+        <select
+          formControlName="propertyId"
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+          [class.border-red-500]="isFieldInvalid('unitId')"
+          [class.focus:ring-red-500]="isFieldInvalid('unitId')">
+          <option value="">Sélectionnez une unité</option>
+          <option *ngFor="let propertie of properties" [value]="propertie.id">
+            {{ propertie.typeName}} - {{ propertie.id }}
+          </option>
+        </select>
+        <div *ngIf="isFieldInvalid('propertyId')" class="mt-1 text-sm text-red-600">
+          {{ getFieldError('propertyId') }}
+        </div>
+      </div>
+       
+     </div>
+   </form>
+ </div>
+ 
+
+ 
+ <!-- Modal Footer -->
+ <!-- (click)="onSaveNewMaterial()" -->
+ <div class="flex items-center justify-end gap-4 p-6 border-t border-gray-200">
+   <button 
+     type="button"
+     (click)="closeNewMaterialModal()"
+     class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium">
+     Annuler
+   </button>
+   <button 
+   
+   type="submit"
+   (click)="onSaveNewMaterial()"
+   [disabled]="!isFormValid() || loading"
+     class="px-6 py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed font-medium">
+     <span *ngIf="loading" class="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></span>
+     {{ loading ? 'Enregistrement...' : 'Enregistrer' }}
+   </button>
+ </div>
+</div>
+
+<!-- Bouton pour ouvrir le modal (exemple) -->
+
+
+  <!-- Modal pour les mouvements -->
+  <!-- <div *ngIf="showMovementModal && selectedMaterial" 
+       class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+       (click)="closeMovementModal()">
+    
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-hidden"
+         (click)="$event.stopPropagation()">
+      
+      <div class="flex items-center justify-between p-6 border-b border-gray-200">
+        <h2 class="text-xl font-semibold text-gray-900">
+          Mouvements - {{ getMaterialName(selectedMaterial) }}
+        </h2>
+        <button 
+          (click)="closeMovementModal()"
+          class="text-gray-400 hover:text-gray-600 text-2xl leading-none">
+          ×
+        </button>
+      </div>
+      
+      <div class="p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="font-medium text-gray-900 mb-4">Informations du matériau</h3>
+            <div class="space-y-2 text-sm">
+              <div><span class="font-medium">Stock actuel:</span> {{ getMaterialStock(selectedMaterial) }} {{ getMaterialUnit(selectedMaterial) }}</div>
+              <div><span class="font-medium">Seuil critique:</span> {{ getMaterialThreshold(selectedMaterial) }} {{ getMaterialUnit(selectedMaterial) }}</div>
+              <div><span class="font-medium">Statut:</span> 
+                <span [class]="getStatusClass(getMaterialStatus(selectedMaterial))" class="px-2 py-1 rounded text-xs ml-2">
+                  {{ getMaterialStatus(selectedMaterial) }}
+                </span>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="font-medium text-gray-900 mb-4">Ajouter un mouvement</h3>
+            <form [formGroup]="movementForm" class="space-y-4">
+              <div class="grid grid-cols-2 gap-4">
+                <select formControlName="type" class="px-3 py-2 border border-gray-300 rounded-lg">
+                  <option value="ENTRY">Entrée</option>
+                  <option value="OUT">Sortie</option>
+                  <option value="ADJUSTMENT">Ajustement</option>
+                </select>
+                <input type="number" formControlName="quantity" placeholder="Quantité" 
+                       class="px-3 py-2 border border-gray-300 rounded-lg">
+              </div>
+              <input type="text" formControlName="reference" placeholder="Référence" 
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+              <textarea formControlName="comment" placeholder="Commentaire" 
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg" rows="2"></textarea>
+            </form>
+          </div>
+        </div>
+        
+        <div class="mt-6">
+          <h3 class="font-medium text-gray-900 mb-4">Historique des mouvements</h3>
+          <div class="max-h-60 overflow-y-auto">
+            <div *ngFor="let movement of recentMovements" 
+                 class="flex justify-between items-center py-2 border-b border-gray-100">
+              <div>
+                <span [class]="getMovementTypeClass(movement.type)" class="font-medium">
+                  {{ movement.type }}
+                </span>
+                <span class="ml-2">{{ movement.quantity }} {{ getMaterialUnit(selectedMaterial) }}</span>
+                <span class="ml-2 text-sm text-gray-500">{{ movement.reference }}</span>
+              </div>
+              <span class="text-sm text-gray-500">{{ movement.date }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+<!-- </div> -->
+<!-- 
+
+</div> -->
+<div class="pagination-info" *ngIf="data && data.pageable">
+  <p>Page actuelle: {{ data.pageable.pageNumber + 1 }} / {{ data.totalPages }}</p>
+  <p>Total éléments: {{ data.totalElements }}</p>
+</div>
+</div>
+</div>
